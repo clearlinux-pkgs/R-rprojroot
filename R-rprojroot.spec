@@ -4,7 +4,7 @@
 #
 Name     : R-rprojroot
 Version  : 1.2
-Release  : 10
+Release  : 11
 URL      : https://cran.r-project.org/src/contrib/rprojroot_1.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rprojroot_1.2.tar.gz
 Summary  : Finding Files in Project Subdirectories

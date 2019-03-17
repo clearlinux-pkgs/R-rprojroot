@@ -4,19 +4,13 @@
 #
 Name     : R-rprojroot
 Version  : 1.3.2
-Release  : 26
+Release  : 27
 URL      : https://cran.r-project.org/src/contrib/rprojroot_1.3-2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rprojroot_1.3-2.tar.gz
 Summary  : Finding Files in Project Subdirectories
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: R-backports
-Requires: R-evaluate
-Requires: R-withr
-BuildRequires : R-backports
-BuildRequires : R-evaluate
-BuildRequires : R-withr
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
 project root. The 'root' of a project is defined as a directory
@@ -31,11 +25,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1515012453
+export SOURCE_DATE_EPOCH=1552811995
 
 %install
+export SOURCE_DATE_EPOCH=1552811995
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1515012453
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -53,6 +47,11 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library rprojroot
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library rprojroot
+for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
 echo "FFLAGS = $FFLAGS -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -ftree-vectorize " >> ~/.R/Makevars
@@ -65,8 +64,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library rprojroot|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  rprojroot || :
 
 
 %files
@@ -96,3 +94,26 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/rprojroot/help/rprojroot.rdx
 /usr/lib64/R/library/rprojroot/html/00Index.html
 /usr/lib64/R/library/rprojroot/html/R.css
+/usr/lib64/R/library/rprojroot/tests/testthat.R
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/DESCRIPTION
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/a/b/a
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/a/b/b
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/a/b/c/d
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/a/remake.yml
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/b
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/c
+/usr/lib64/R/library/rprojroot/tests/testthat/hierarchy/hierarchy.Rproj
+/usr/lib64/R/library/rprojroot/tests/testthat/package/DESCRIPTION
+/usr/lib64/R/library/rprojroot/tests/testthat/package/tests/testthat.R
+/usr/lib64/R/library/rprojroot/tests/testthat/package/tests/testthat/test-something.R
+/usr/lib64/R/library/rprojroot/tests/testthat/scripts/thisfile-cat.R
+/usr/lib64/R/library/rprojroot/tests/testthat/scripts/thisfile.R
+/usr/lib64/R/library/rprojroot/tests/testthat/scripts/thisfile.Rmd
+/usr/lib64/R/library/rprojroot/tests/testthat/startup.Rs
+/usr/lib64/R/library/rprojroot/tests/testthat/test-criterion.R
+/usr/lib64/R/library/rprojroot/tests/testthat/test-make.R
+/usr/lib64/R/library/rprojroot/tests/testthat/test-root.R
+/usr/lib64/R/library/rprojroot/tests/testthat/test-testthat.R
+/usr/lib64/R/library/rprojroot/tests/testthat/test-thisfile.R
+/usr/lib64/R/library/rprojroot/tests/testthat/vcs/git.zip
+/usr/lib64/R/library/rprojroot/tests/testthat/vcs/svn.zip

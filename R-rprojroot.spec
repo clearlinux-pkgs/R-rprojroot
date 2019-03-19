@@ -4,14 +4,12 @@
 #
 Name     : R-rprojroot
 Version  : 1.3.2
-Release  : 29
+Release  : 30
 URL      : https://cran.r-project.org/src/contrib/rprojroot_1.3-2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rprojroot_1.3-2.tar.gz
 Summary  : Finding Files in Project Subdirectories
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: R-backports
-Requires: R-rlang
 BuildRequires : R-backports
 BuildRequires : R-rlang
 BuildRequires : buildreq-R
@@ -29,10 +27,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552938653
+export SOURCE_DATE_EPOCH=1552956007
 
 %install
-export SOURCE_DATE_EPOCH=1552938653
+export SOURCE_DATE_EPOCH=1552956007
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "

@@ -4,14 +4,14 @@
 #
 Name     : R-rprojroot
 Version  : 1.3.2
-Release  : 34
+Release  : 35
 URL      : https://cran.r-project.org/src/contrib/rprojroot_1.3-2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rprojroot_1.3-2.tar.gz
 Summary  : Finding Files in Project Subdirectories
 Group    : Development/Tools
 License  : GPL-3.0
+Requires: R-backports
 BuildRequires : R-backports
-BuildRequires : R-rlang
 BuildRequires : buildreq-R
 
 %description
@@ -26,13 +26,13 @@ project root. The 'root' of a project is defined as a directory
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1552956007
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569373326
 
 %install
-export SOURCE_DATE_EPOCH=1552956007
+export SOURCE_DATE_EPOCH=1569373326
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -61,12 +61,12 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc  rprojroot || :
+R CMD check --no-manual --no-examples --no-codoc rprojroot || :
 
 
 %files

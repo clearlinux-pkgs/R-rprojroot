@@ -1,6 +1,6 @@
 # This file contains recursive sources that require this package
 R-DBI
-R-DBItest
+R-RSQLite
 R-desc
 R-here
 R-pkgbuild

@@ -6,3 +6,4 @@ R-pkgload
 R-rcmdcheck
 R-styler
 R-usethis
+R-vcr

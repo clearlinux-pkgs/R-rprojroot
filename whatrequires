@@ -1,9 +1,8 @@
 # This file contains recursive sources that require this package
-R-desc
 R-here
-R-pkgbuild
 R-pkgload
 R-rcmdcheck
+R-rhub
 R-styler
 R-usethis
 R-vcr
